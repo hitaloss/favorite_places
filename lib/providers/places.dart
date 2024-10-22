@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:favorite_places/models/place_model.dart';
+import 'package:favorite_places/models/place.dart';
 
 class PlacesNotifier extends StateNotifier<List<Place>> {
   PlacesNotifier() : super([]);

@@ -1,7 +1,7 @@
-import 'package:favorite_places/providers/places_provider.dart';
+import 'package:favorite_places/providers/places.dart';
 import 'package:flutter/material.dart';
 
-import 'package:favorite_places/models/place_model.dart';
+import 'package:favorite_places/models/place.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -33,7 +33,7 @@ class _NewPlaceScreenState extends ConsumerState<NewPlaceScreen> {
     }
     ref
         .read(placesProvider.notifier)
-        .addPlace(Place(DateTime.now().toString(), _titleValueController.text));
+        .addPlace(Place(title: _titleValueController.text));
     snackBarNotification("Place added");
     Navigator.of(context).pop();
   }
