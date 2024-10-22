@@ -15,7 +15,6 @@ class NewPlaceScreen extends ConsumerStatefulWidget {
 class _NewPlaceScreenState extends ConsumerState<NewPlaceScreen> {
   final _titleValueController = TextEditingController();
 
-  // TODO: IMPLEMENT SNACKBAR
   void snackBarNotification(String message) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(message),
@@ -36,6 +35,7 @@ class _NewPlaceScreenState extends ConsumerState<NewPlaceScreen> {
         .read(placesProvider.notifier)
         .addPlace(Place(DateTime.now().toString(), _titleValueController.text));
     snackBarNotification("Place added");
+    Navigator.of(context).pop();
   }
 
   @override
@@ -53,6 +53,7 @@ class _NewPlaceScreenState extends ConsumerState<NewPlaceScreen> {
         child: Expanded(
           child: Column(children: [
             TextField(
+              textCapitalization: TextCapitalization.sentences,
               controller: _titleValueController,
               decoration: const InputDecoration(label: Text("Title")),
               style: const TextStyle(color: Colors.white),
