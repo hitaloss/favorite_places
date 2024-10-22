@@ -50,22 +50,20 @@ class _NewPlaceScreenState extends ConsumerState<NewPlaceScreen> {
       appBar: AppBar(title: const Text("Add new Place")),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: Expanded(
-          child: Column(children: [
-            TextField(
-              textCapitalization: TextCapitalization.sentences,
-              controller: _titleValueController,
-              decoration: const InputDecoration(label: Text("Title")),
-              style: const TextStyle(color: Colors.white),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton.icon(
-              onPressed: _addPlace,
-              icon: const Icon(Icons.add),
-              label: const Text("Add Place"),
-            )
-          ]),
-        ),
+        child: Column(children: [
+          TextField(
+            textCapitalization: TextCapitalization.sentences,
+            controller: _titleValueController,
+            decoration: const InputDecoration(label: Text("Title")),
+            style: const TextStyle(color: Colors.white),
+          ),
+          const SizedBox(height: 20),
+          ElevatedButton.icon(
+            onPressed: _addPlace,
+            icon: const Icon(Icons.add),
+            label: const Text("Add Place"),
+          )
+        ]),
       ),
     );
   }
