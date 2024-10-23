@@ -18,10 +18,13 @@ class PlacesScreen extends ConsumerWidget {
   Widget build(BuildContext context, ref) {
     List<Place> placesList = ref.watch(placesProvider);
 
-    Widget content = const Center(
+    Widget content = Center(
         child: Text(
       "No places added yet",
-      style: TextStyle(color: Colors.white),
+      style: Theme.of(context)
+          .textTheme
+          .bodyLarge!
+          .copyWith(color: Theme.of(context).colorScheme.onBackground),
     ));
 
     if (placesList.isNotEmpty) {
@@ -32,7 +35,7 @@ class PlacesScreen extends ConsumerWidget {
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (ctx) => PlaceDetailsScreen(
-                          title: placesList[index].title,
+                          place: placesList[index],
                         )));
               },
               title: Text(
