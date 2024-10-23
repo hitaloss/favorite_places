@@ -37,8 +37,8 @@ class PlacesScreen extends ConsumerWidget {
               },
               title: Text(
                 placesList[index].title,
-                style:
-                    const TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground),
               ));
         },
       );
