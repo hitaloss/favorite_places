@@ -1,7 +1,7 @@
-import 'package:favorite_places/widgets/location_input.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
+import 'package:favorite_places/widgets/location_input.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:favorite_places/widgets/image_input.dart';

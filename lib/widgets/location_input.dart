@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 
+import 'package:favorite_places/models/place.dart';
+
 import 'package:location/location.dart';
 import 'package:http/http.dart' as http;
-
-import 'package:favorite_places/models/place.dart';
 
 class LocationInput extends StatefulWidget {
   const LocationInput({super.key, required this.onPickLocation});
