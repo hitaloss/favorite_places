@@ -1,9 +1,12 @@
-import 'package:favorite_places/providers/places.dart';
+import 'package:favorite_places/widgets/location_input.dart';
 import 'package:flutter/material.dart';
-
-import 'package:favorite_places/models/place.dart';
+import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:favorite_places/widgets/image_input.dart';
+import 'package:favorite_places/providers/places.dart';
+import 'package:favorite_places/models/place.dart';
 
 class NewPlaceScreen extends ConsumerStatefulWidget {
   const NewPlaceScreen({super.key});
@@ -14,26 +17,26 @@ class NewPlaceScreen extends ConsumerStatefulWidget {
 
 class _NewPlaceScreenState extends ConsumerState<NewPlaceScreen> {
   final _titleValueController = TextEditingController();
+  File? _selectedImage;
+  PlaceLocation? _selectedLocation;
 
   void snackBarNotification(String message) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(message),
-      action: SnackBarAction(
-          label: "Dismiss",
-          onPressed: () {
-            ScaffoldMessenger.of(context).removeCurrentSnackBar();
-          }),
     ));
   }
 
   void _addPlace() {
-    if (_titleValueController.text.trim().isEmpty) {
-      snackBarNotification("Please, make sure to insert a valid title");
+    if (_titleValueController.text.isEmpty ||
+        _selectedImage == null ||
+        _selectedLocation == null) {
+      snackBarNotification("Please, make sure to complete all fields required");
       return;
     }
-    ref
-        .read(placesProvider.notifier)
-        .addPlace(Place(title: _titleValueController.text));
+    ref.read(placesProvider.notifier).addPlace(Place(
+        title: _titleValueController.text,
+        image: _selectedImage!,
+        location: _selectedLocation!));
     snackBarNotification("Place added");
     Navigator.of(context).pop();
   }
@@ -57,7 +60,17 @@ class _NewPlaceScreenState extends ConsumerState<NewPlaceScreen> {
             decoration: const InputDecoration(label: Text("Title")),
             style: const TextStyle(color: Colors.white),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 10),
+          ImageInput(
+            onPickImage: (image) {
+              _selectedImage = image;
+            },
+          ),
+          const SizedBox(height: 16),
+          LocationInput(onPickLocation: (PlaceLocation location) {
+            _selectedLocation = location;
+          }),
+          const SizedBox(height: 16),
           ElevatedButton.icon(
             onPressed: _addPlace,
             icon: const Icon(Icons.add),
