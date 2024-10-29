@@ -32,6 +32,10 @@ class PlacesScreen extends ConsumerWidget {
         itemCount: placesList.length,
         itemBuilder: (context, index) {
           return ListTile(
+              leading: CircleAvatar(
+                radius: 26,
+                backgroundImage: FileImage(placesList[index].image),
+              ),
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (ctx) => PlaceDetailsScreen(
@@ -58,7 +62,10 @@ class PlacesScreen extends ConsumerWidget {
               icon: const Icon(Icons.add))
         ],
       ),
-      body: content,
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: content,
+      ),
     );
   }
 }
