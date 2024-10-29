@@ -32,21 +32,31 @@ class PlacesScreen extends ConsumerWidget {
         itemCount: placesList.length,
         itemBuilder: (context, index) {
           return ListTile(
-              leading: CircleAvatar(
-                radius: 26,
-                backgroundImage: FileImage(placesList[index].image),
-              ),
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (ctx) => PlaceDetailsScreen(
-                          place: placesList[index],
-                        )));
-              },
-              title: Text(
-                placesList[index].title,
-                style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                    color: Theme.of(context).colorScheme.onBackground),
-              ));
+            leading: CircleAvatar(
+              radius: 26,
+              backgroundImage: FileImage(placesList[index].image),
+            ),
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (ctx) => PlaceDetailsScreen(
+                        place: placesList[index],
+                      )));
+            },
+            title: Text(
+              placesList[index].title,
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium!
+                  .copyWith(color: Theme.of(context).colorScheme.onBackground),
+            ),
+            subtitle: Text(
+              placesList[index].location.address,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodySmall!
+                  .copyWith(color: Theme.of(context).colorScheme.onBackground),
+            ),
+          );
         },
       );
     }
