@@ -1,8 +1,9 @@
+import 'package:flutter/material.dart';
+
 import 'package:favorite_places/models/place.dart';
 import 'package:favorite_places/providers/places.dart';
 import 'package:favorite_places/screens/new_place.dart';
 import 'package:favorite_places/screens/place_details.dart';
-import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -32,17 +33,31 @@ class PlacesScreen extends ConsumerWidget {
         itemCount: placesList.length,
         itemBuilder: (context, index) {
           return ListTile(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (ctx) => PlaceDetailsScreen(
-                          place: placesList[index],
-                        )));
-              },
-              title: Text(
-                placesList[index].title,
-                style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                    color: Theme.of(context).colorScheme.onBackground),
-              ));
+            leading: CircleAvatar(
+              radius: 26,
+              backgroundImage: FileImage(placesList[index].image),
+            ),
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (ctx) => PlaceDetailsScreen(
+                        place: placesList[index],
+                      )));
+            },
+            title: Text(
+              placesList[index].title,
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium!
+                  .copyWith(color: Theme.of(context).colorScheme.onBackground),
+            ),
+            subtitle: Text(
+              placesList[index].location.address,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodySmall!
+                  .copyWith(color: Theme.of(context).colorScheme.onBackground),
+            ),
+          );
         },
       );
     }
@@ -58,7 +73,10 @@ class PlacesScreen extends ConsumerWidget {
               icon: const Icon(Icons.add))
         ],
       ),
-      body: content,
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: content,
+      ),
     );
   }
 }
